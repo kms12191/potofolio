@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
+
+:root {
+  font-family: 'DM Sans', 'Noto Sans KR', system-ui, sans-serif;
+  color: #172033;
+  background: #f7f3ea;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --ink: #172033;
+  --muted: #667085;
+  --paper: #f7f3ea;
+  --white: #fffdf8;
+  --line: rgba(23, 32, 51, 0.13);
+  --blue: #4f46e5;
+  --shadow: 0 24px 70px rgba(39, 45, 77, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 209, 102, 0.34), transparent 28%),
+    radial-gradient(circle at 84% 16%, rgba(143, 201, 255, 0.28), transparent 30%),
+    linear-gradient(135deg, #f7f3ea 0%, #f8fbff 52%, #fff3f7 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(23, 32, 51, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 32, 51, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
