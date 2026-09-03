@@ -43,7 +43,7 @@ test('trading links to the published Vercel site', () => {
   assert.equal(trading.url, 'https://trading-lake-ten.vercel.app/')
 })
 
-test('project cards expose portfolio actions for the card playground concept', () => {
+test('project cards expose portfolio actions for the elevator concept', () => {
   for (const project of projects) {
     assert.ok(Array.isArray(project.actions))
     assert.ok(project.actions.some((action) => action.label === '사이트 보기'))
@@ -99,10 +99,38 @@ test('project cards use emoji snapshots instead of title initials', () => {
 test('project card hover styles make interactions clearly visible', () => {
   const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
 
-  assert.match(css, /\.project-card:hover \{[\s\S]*translateY\(-18px\)/)
-  assert.match(css, /\.project-card:hover \.project-snapshot/)
-  assert.match(css, /\.project-card:hover \.project-snapshot span/)
-  assert.match(css, /\.project-card:hover \.main-action/)
+  assert.match(css, /\.elevator-project-card:hover \{[\s\S]*translateX\(10px\)/)
+  assert.match(css, /\.elevator-project-card:hover \.floor-emoji/)
+  assert.match(css, /\.elevator-project-card:hover \.main-action/)
+})
+
+test('app renders an elevator scroll journey structure', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+
+  assert.match(appSource, /className="elevator-shell"/)
+  assert.match(appSource, /className="elevator-rail"/)
+  assert.match(appSource, /className="elevator-floor hero-floor"/)
+  assert.match(appSource, /className="elevator-floor project-floor"/)
+  assert.match(appSource, /className="floor-door"/)
+  assert.ok(appSource.includes('Developing Ideas into Services'))
+  assert.doesNotMatch(appSource, /ELEVATOR MODE/)
+  assert.ok(appSource.includes('층을 내려가며 프로젝트를 확인하세요'))
+})
+
+test('elevator floors are generated from all portfolio projects', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+
+  assert.match(appSource, /projects\.map\(\(project, index\)/)
+  assert.match(appSource, /String\(index \+ 2\)\.padStart\(2, '0'\)/)
+})
+
+test('elevator layout uses sticky rail and scroll-linked reveal animations', () => {
+  const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
+
+  assert.match(css, /\.elevator-rail \{[\s\S]*position: sticky/)
+  assert.match(css, /\.elevator-floor \{[\s\S]*min-height: min\(760px, calc\(100vh - 120px\)\)/)
+  assert.match(css, /animation-timeline: view\(\)/)
+  assert.match(css, /@keyframes elevator-open/)
 })
 
 test('hero does not show confusing drag decoration text', () => {
@@ -150,25 +178,54 @@ test('profile exposes a self promotion card for the hero section', () => {
   ])
 })
 
-test('self promotion card is rendered as a separate section outside the hero summary board', () => {
-  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
-  const heroBoardSource = appSource.slice(
-    appSource.indexOf('<aside className="hero-board"'),
-    appSource.indexOf('</aside>') + '</aside>'.length,
-  )
-
-  assert.doesNotMatch(heroBoardSource, /className="pr-card"/)
-  assert.match(appSource, /<section className="section about-section" id="about">/)
-})
-
-test('self promotion card appears before the main hero section', () => {
+test('self promotion card is rendered in the elevator intro floor', () => {
   const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
 
-  assert.ok(appSource.indexOf('className="section about-section"') < appSource.indexOf('className="hero playground-hero"'))
+  assert.match(appSource, /<section className="elevator-floor hero-floor" id="about">/)
+  assert.match(appSource, /className="intro-panel"/)
 })
 
-test('top self promotion section has breathing room before the hero section', () => {
+test('self promotion floor appears before the project floors', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+
+  assert.ok(appSource.indexOf('className="elevator-floor hero-floor"') < appSource.indexOf('className="elevator-floor project-floor"'))
+})
+
+test('elevator intro floor has breathing room before project floors', () => {
   const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
 
-  assert.ok(css.includes('.about-section:first-child {\n  padding-top: 0;\n  margin-bottom: 56px;\n}'))
+  assert.ok(css.includes('.hero-floor {\n  margin-bottom: 40px;\n}'))
+})
+
+
+test('intro headline is sized down for elevator layout', () => {
+  const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
+
+  assert.match(css, /\.intro-panel h1 \{[\s\S]*font-size: clamp\(36px, 5\.4vw, 68px\)/)
+})
+
+
+test('skills floor shows a skills eyebrow and uses smaller heading', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+  const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
+  const skillsSource = appSource.slice(
+    appSource.indexOf('<section className="elevator-floor skills-floor"'),
+    appSource.indexOf('<section className="elevator-floor contact-panel"'),
+  )
+
+  assert.match(skillsSource, /<p className="eyebrow">Skills<\/p>/)
+  assert.match(css, /\.skills-floor \.floor-copy h2 \{[\s\S]*font-size: clamp\(32px, 4\.4vw, 58px\)/)
+})
+
+
+test('document title uses portfolio owner name', () => {
+  const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8')
+
+  assert.match(html, /<title>강민식 \| Potofoilo<\/title>/)
+})
+
+test('layout removes the loose top gap above the header', () => {
+  const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
+
+  assert.match(css, /\.site-header \{[\s\S]*margin: 0 0 28px;/)
 })
