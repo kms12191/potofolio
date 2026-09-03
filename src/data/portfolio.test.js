@@ -221,7 +221,7 @@ test('skills floor shows a skills eyebrow and uses smaller heading', () => {
 test('document title uses portfolio owner name', () => {
   const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8')
 
-  assert.match(html, /<title>강민식 \| Potofoilo<\/title>/)
+  assert.match(html, /<title>강민식 \| Portfolio<\/title>/)
 })
 
 test('layout removes the loose top gap above the header', () => {
