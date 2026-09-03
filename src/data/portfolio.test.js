@@ -80,7 +80,7 @@ test('profile groups skills like the referenced stack list design', () => {
   assert.deepEqual(profile.skills['Back-End'], ['Python', 'Flask', 'FastAPI', 'SQLAlchemy', 'REST API'])
   assert.deepEqual(profile.skills['AI / Data'], ['Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'Optuna', 'OpenAI API'])
   assert.deepEqual(profile.skills.Database, ['SQLite', 'PostgreSQL', 'Supabase'])
-  assert.deepEqual(profile.skills['Deploy & Tools'], ['Docker', 'Streamlit', 'Git', 'GitHub', 'VS Code', 'Figma', 'Adobe Photoshop'])
+  assert.deepEqual(profile.skills['Deploy & Tools'], ['Docker', 'Streamlit', 'Git', 'GitHub', 'VS Code', 'Figma'])
 })
 
 test('project cards use emoji snapshots instead of title initials', () => {
@@ -129,4 +129,46 @@ test('hero interest card includes app as an interest area', () => {
   const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
 
   assert.ok(appSource.includes('<strong>Web · Data · AI · App</strong>'))
+})
+
+test('hero eyebrow communicates a vision-driven portfolio message', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+
+  assert.ok(appSource.includes('Developing Ideas into Services'))
+  assert.doesNotMatch(appSource, /Card Playground Portfolio/)
+})
+
+test('profile exposes a self promotion card for the hero section', () => {
+  assert.equal(profile.prCard.label, 'About Me')
+  assert.equal(profile.prCard.title, '문제를 서비스로 연결하는 개발자 강민식입니다')
+  assert.equal(profile.prCard.description, '데이터를 이해하고, 사용자가 실제로 쓰는 웹/App 서비스로 구현하는 과정을 좋아합니다.')
+  assert.deepEqual(profile.prCard.points, [
+    '문제를 끝까지 쪼개서 이해합니다',
+    '데이터를 근거로 방향을 잡습니다',
+    '작동하는 서비스로 완성하는 것을 중요하게 생각합니다',
+    '새로운 기술을 프로젝트에 적용하며 성장합니다',
+  ])
+})
+
+test('self promotion card is rendered as a separate section outside the hero summary board', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+  const heroBoardSource = appSource.slice(
+    appSource.indexOf('<aside className="hero-board"'),
+    appSource.indexOf('</aside>') + '</aside>'.length,
+  )
+
+  assert.doesNotMatch(heroBoardSource, /className="pr-card"/)
+  assert.match(appSource, /<section className="section about-section" id="about">/)
+})
+
+test('self promotion card appears before the main hero section', () => {
+  const appSource = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
+
+  assert.ok(appSource.indexOf('className="section about-section"') < appSource.indexOf('className="hero playground-hero"'))
+})
+
+test('top self promotion section has breathing room before the hero section', () => {
+  const css = readFileSync(new URL('../App.css', import.meta.url), 'utf8')
+
+  assert.ok(css.includes('.about-section:first-child {\n  padding-top: 0;\n  margin-bottom: 56px;\n}'))
 })

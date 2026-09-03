@@ -22,11 +22,22 @@ export const profile = {
     { label: '관심 분야', value: 'Web · Data · AI · App' },
     { label: '성장 방향', value: '꾸준히 개선 중' },
   ],
+  prCard: {
+    label: 'About Me',
+    title: '문제를 서비스로 연결하는 개발자 강민식입니다',
+    description: '데이터를 이해하고, 사용자가 실제로 쓰는 웹/App 서비스로 구현하는 과정을 좋아합니다.',
+    points: [
+      '문제를 끝까지 쪼개서 이해합니다',
+      '데이터를 근거로 방향을 잡습니다',
+      '작동하는 서비스로 완성하는 것을 중요하게 생각합니다',
+      '새로운 기술을 프로젝트에 적용하며 성장합니다',
+    ],
+  },
   skills: {
     'Front-End': ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Vite', 'Tailwind CSS'],
     'Back-End': ['Python', 'Flask', 'FastAPI', 'SQLAlchemy', 'REST API'],
     'AI / Data': ['Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'Optuna', 'OpenAI API'],
     Database: ['SQLite', 'PostgreSQL', 'Supabase'],
-    'Deploy & Tools': ['Docker', 'Streamlit', 'Git', 'GitHub', 'VS Code', 'Figma', 'Adobe Photoshop'],
+    'Deploy & Tools': ['Docker', 'Streamlit', 'Git', 'GitHub', 'VS Code', 'Figma'],
   },
 }

@@ -26,9 +26,29 @@ function App() {
       </header>
 
       <main id="top">
+
+
+        <section className="section about-section" id="about">
+          <div className="about-heading">
+            <p className="eyebrow">{profile.prCard.label}</p>
+            <h2>{profile.prCard.title}</h2>
+          </div>
+          <div className="pr-card standalone-pr-card">
+            <p>{profile.prCard.description}</p>
+            <ul>
+              {profile.prCard.points.map((point, index) => (
+                <li key={point}>
+                  <strong>{String(index + 1).padStart(2, '0')}</strong>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         <section className="hero playground-hero" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">Card Playground Portfolio</p>
+            <p className="eyebrow">Developing Ideas into Services</p>
             <h1 id="hero-title">다양한 시도로 더 나은 경험을 만듭니다.</h1>
             <p>{profile.intro}</p>
             <div className="hero-actions">
