@@ -10,6 +10,15 @@ test('profile uses the confirmed owner name and app interest area', () => {
   assert.equal(profile.stats.find((stat) => stat.label === '관심 분야').value, 'Web · Data · AI · App')
 })
 
+test('projects are ordered newest first', () => {
+  assert.deepEqual(projects.map((project) => project.id), [
+    'trading',
+    'drug-main',
+    'movie-service',
+    'bookstore',
+  ])
+})
+
 test('portfolio contains four complete project entries', () => {
   assert.equal(projects.length, 4)
 
@@ -70,7 +79,7 @@ test('projects include categories used by the playground filters', () => {
 test('project filter helper narrows cards by category and search text', () => {
   assert.deepEqual(projectFilters, ['전체', 'Web', 'Data', 'AI', 'Flask'])
   assert.deepEqual(filterProjects(projects, 'Flask').map((project) => project.id), ['movie-service'])
-  assert.deepEqual(filterProjects(projects, 'AI').map((project) => project.id), ['drug-main', 'trading'])
+  assert.deepEqual(filterProjects(projects, 'AI').map((project) => project.id), ['trading', 'drug-main'])
   assert.deepEqual(filterProjects(projects, '전체', 'book').map((project) => project.id), ['bookstore'])
 })
 
