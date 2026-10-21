@@ -12,6 +12,7 @@ test('profile uses the confirmed owner name and app interest area', () => {
 
 test('projects are ordered newest first', () => {
   assert.deepEqual(projects.map((project) => project.id), [
+    'record-of-the-cup',
     'trading',
     'drug-main',
     'movie-service',
@@ -19,8 +20,8 @@ test('projects are ordered newest first', () => {
   ])
 })
 
-test('portfolio contains four complete project entries', () => {
-  assert.equal(projects.length, 4)
+test('portfolio contains five complete project entries', () => {
+  assert.equal(projects.length, 5)
 
   for (const project of projects) {
     assert.ok(project.id)
@@ -94,6 +95,7 @@ test('profile groups skills like the referenced stack list design', () => {
 
 test('project cards use emoji snapshots instead of title initials', () => {
   const expectedEmojis = new Map([
+    ['record-of-the-cup', '🍸'],
     ['bookstore', '📚'],
     ['movie-service', '🎬'],
     ['drug-main', '💊'],

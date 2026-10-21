@@ -9,8 +9,8 @@ const elevatorStops = [
     label: project.title,
     href: '#floor-' + project.id,
   })),
-  { number: '06', label: 'Skills', href: '#skills' },
-  { number: '07', label: 'Contact', href: '#contact' },
+  { number: String(projects.length + 2).padStart(2, '0'), label: 'Skills', href: '#skills' },
+  { number: String(projects.length + 3).padStart(2, '0'), label: 'Contact', href: '#contact' },
 ]
 
 function App() {

@@ -1,7 +1,24 @@
 export const projects = [
   {
-    id: 'trading',
+    id: 'record-of-the-cup',
     number: '01',
+    title: 'Record of the Cup',
+    emoji: '🍸',
+    category: '칵테일 · 와인 정보 서비스 · 개인 프로젝트',
+    summary: '칵테일 레시피부터 와인의 특성과 음식 페어링까지 탐색하는 개인 프로젝트',
+    description: '직접 제작한 칵테일·와인 정보 웹사이트입니다. 칵테일의 제조법, 알코올·논알코올 여부와 추천 잔을 안내하고, 와인의 종류(레드·화이트 등), 바디감, 산미, 평점과 잘 어울리는 음식 페어링 정보를 제공합니다.',
+    tags: ['개인 프로젝트', 'Cocktail', 'Wine', 'Food Pairing'],
+    filters: ['Web'],
+    url: 'https://record-of-the-cup.onrender.com',
+    actions: [
+      { label: '사이트 보기', url: 'https://record-of-the-cup.onrender.com' },
+    ],
+    accent: '#db7093',
+    marker: 'DRINKS',
+  },
+  {
+    id: 'trading',
+    number: '02',
     title: 'Trading',
     emoji: '📈',
     category: '생성형 AI 주식 Web App',
@@ -19,7 +36,7 @@ export const projects = [
   },
   {
     id: 'drug-main',
-    number: '02',
+    number: '03',
     title: 'DrugMain',
     emoji: '💊',
     category: '빅데이터 분석 모델',
@@ -36,7 +53,7 @@ export const projects = [
   },
   {
     id: 'movie-service',
-    number: '03',
+    number: '04',
     title: 'FilmAtique',
     emoji: '🎬',
     category: 'Flask 영화 예매 서비스',
@@ -55,7 +72,7 @@ export const projects = [
   },
   {
     id: 'bookstore',
-    number: '04',
+    number: '05',
     title: 'Bookstore',
     emoji: '📚',
     category: 'API 기반 인터넷 서점',
@@ -70,4 +87,5 @@ export const projects = [
     ],
     accent: '#7c3aed',
     marker: 'BOOK',
-  },]
+  },
+]

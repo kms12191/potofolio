@@ -18,7 +18,7 @@ export const profile = {
   githubUrl: 'https://github.com/kms12191',
   resumeUrl: '#',
   stats: [
-    { label: '대표 프로젝트', value: '4+' },
+    { label: '대표 프로젝트', value: '5+' },
     { label: '관심 분야', value: 'Web · Data · AI · App' },
     { label: '성장 방향', value: '꾸준히 개선 중' },
   ],
